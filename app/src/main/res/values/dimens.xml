@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_layout_padding">16dp</dimen>
+    <dimen name="base_layout_margin">16dp</dimen>
+
+    <dimen name="spacing_ultra_small">5dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_huge">40dp</dimen>
+
+    <dimen name="textview_H0_size">24sp</dimen>
+    <dimen name="textview_H1_size">18sp</dimen>
+    <dimen name="textview_H2_size">17sp</dimen>
+    <dimen name="textview_H3_size">15sp</dimen>
+    <dimen name="textview_H4_size">15sp</dimen>
+    <dimen name="textview_H5_size">14sp</dimen>
+
+</resources>

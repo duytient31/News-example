@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/colorPurple</color>
+    <color name="colorPrimaryDark">@color/colorPurpleDark</color>
+    <color name="colorAccent">@color/colorGray500</color>
+
+    <!-- Base colors -->
+    <color name="colorPurpleDark">#512DA8</color>
+    <color name="colorPurple">#673AB7</color>
+
+    <color name="colorGray100">#F4F4F4</color>
+    <color name="colorGray300">#CCCCCC</color>
+    <color name="colorGray500">#777777</color>
+    <color name="colorGray700">#444444</color>
 </resources>
