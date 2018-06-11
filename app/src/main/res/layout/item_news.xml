@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="@dimen/base_layout_padding">
+
+    <TextView
+        android:id="@+id/textView_news_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textview_H1_size"
+        android:textStyle="bold"
+        tools:text="Headline" />
+
+    <TextView
+        android:id="@+id/textView_news_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGray700"
+        android:textSize="@dimen/textview_H5_size"
+        tools:text="This is some text where news content will be displayed" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/textView_news_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGray500"
+            android:textSize="@dimen/textview_H5_size"
+            tools:text="2 hours ago by" />
+
+        <TextView
+            android:id="@+id/textView_news_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_ultra_small"
+            android:textColor="@color/colorPurple"
+            android:textSize="@dimen/textview_H5_size"
+            tools:text="The New York Times" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
