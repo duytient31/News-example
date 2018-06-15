@@ -6,6 +6,7 @@ import com.mario.newsapiexample.network.ApiService;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class NewsRemoteDataSource {
 
@@ -20,7 +21,7 @@ public class NewsRemoteDataSource {
     }
 
     public Observable<News> searchNews(String keyword, int page) {
-        return newsApi.searchNews(keyword, page);
+        return newsApi.searchNews(keyword, page, 10);
     }
 
     interface NewsApi {
@@ -30,8 +31,9 @@ public class NewsRemoteDataSource {
         @GET("v2/top-headlines?country=us")
         Observable<News> getLatestNews();
 
-        @GET("v2/everything?q={query}&page={page}&pageSize=10")
-        Observable<News> searchNews(@Path("query") String keyword,
-                                    @Path("page") int page);
+        @GET("v2/everything")
+        Observable<News> searchNews(@Query("q") String keyword,
+                                    @Query("page") int page,
+                                    @Query("pageSize") int pageSize);
     }
 }

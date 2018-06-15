@@ -1,4 +1,4 @@
-package com.mario.newsapiexample.components.ui.search;
+package com.mario.newsapiexample.components.ui.main;
 
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.base.BaseActivity;
@@ -10,10 +10,10 @@ import javax.inject.Inject;
  * Created by mario on 11/06/18.
  */
 
-public class SearchActivity extends BaseActivity {
+public class MainActivity extends BaseActivity {
 
     @Inject
-    SearchFragment searchFragment;
+    MainFragment searchFragment;
 
     @Override
     protected int getLayoutId() {

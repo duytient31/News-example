@@ -9,6 +9,7 @@
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_huge">36dp</dimen>
 
+    <dimen name="textview_header_size">36sp</dimen>
     <dimen name="textview_H0_size">24sp</dimen>
     <dimen name="textview_H1_size">18sp</dimen>
     <dimen name="textview_H2_size">17sp</dimen>

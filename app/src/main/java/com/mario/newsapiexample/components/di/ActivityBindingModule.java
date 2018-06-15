@@ -1,7 +1,7 @@
 package com.mario.newsapiexample.components.di;
 
-import com.mario.newsapiexample.components.ui.search.SearchActivity;
-import com.mario.newsapiexample.components.ui.search.SearchModule;
+import com.mario.newsapiexample.components.ui.main.MainActivity;
+import com.mario.newsapiexample.components.ui.main.MainModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -14,6 +14,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBindingModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = SearchModule.class)
-    abstract SearchActivity searchActivity();
+    @ContributesAndroidInjector(modules = MainModule.class)
+    abstract MainActivity searchActivity();
 }

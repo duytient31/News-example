@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textView_header_news"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/base_layout_padding"
+    android:textColor="@color/colorGray300"
+    android:textSize="@dimen/textview_header_size"
+    android:textStyle="bold"
+    android:background="@color/colorGray100"
+    tools:text="@string/latest_news" />
+

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@android:color/white"
+    android:orientation="vertical"
     android:padding="@dimen/base_layout_padding">
 
     <TextView
@@ -46,8 +46,5 @@
             android:textColor="@color/colorPurple"
             android:textSize="@dimen/textview_H5_size"
             tools:text="The New York Times" />
-
     </LinearLayout>
-
-
 </LinearLayout>

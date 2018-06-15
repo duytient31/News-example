@@ -77,7 +77,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article{" +
+        return "HeadlineArticle{" +
                 "publishedAt='" + publishedAt + '\'' +
                 ", author='" + author + '\'' +
                 ", urlToImage='" + urlToImage + '\'' +

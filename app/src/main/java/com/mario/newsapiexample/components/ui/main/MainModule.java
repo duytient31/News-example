@@ -1,4 +1,4 @@
-package com.mario.newsapiexample.components.ui.search;
+package com.mario.newsapiexample.components.ui.main;
 
 import com.mario.newsapiexample.components.di.ActivityScoped;
 import com.mario.newsapiexample.components.di.FragmentScoped;
@@ -12,13 +12,13 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class SearchModule {
+public abstract class MainModule {
 
     @ActivityScoped
     @Binds
-    abstract SearchContract.Presenter provideSearchPresenter(SearchPresenter searchPresenter);
+    abstract MainContract.Presenter provideSearchPresenter(MainPresenter searchPresenter);
 
     @FragmentScoped
     @ContributesAndroidInjector
-    abstract SearchFragment searchFragment();
+    abstract MainFragment searchFragment();
 }
