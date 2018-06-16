@@ -13,14 +13,12 @@ import java.util.List;
 public interface SearchContract {
     interface Presenter extends BasePresenter<View> {
         void searchNews(String keyword, int page);
-
-        void loadNextPage(String keyword, int page);
     }
 
     interface View extends BaseDialogView<Presenter> {
-        void showSearchResults(List<Article> newsList);
+        void showFirstPageResults(List<Article> newsList);
 
-        void showNextResults(List<Article> newsList);
+        void showNextPageResults(List<Article> newsList);
 
         void showNoResults();
     }

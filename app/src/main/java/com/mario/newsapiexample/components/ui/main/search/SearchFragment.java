@@ -16,10 +16,10 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.adapter.AdapterItemDivider;
 import com.mario.newsapiexample.components.base.BaseDialogFragment;
-import com.mario.newsapiexample.listener.PaginationScrollListener;
 import com.mario.newsapiexample.components.ui.main.adapter.SearchAdapter;
 import com.mario.newsapiexample.components.ui.main.news.NewsFragment;
 import com.mario.newsapiexample.data.model.news.Article;
+import com.mario.newsapiexample.listener.PaginationScrollListener;
 import com.mario.newsapiexample.util.Utils;
 
 import java.util.List;
@@ -111,7 +111,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
                     @Override
                     public void onNext(CharSequence charSequence) {
                         if (charSequence.length() != 0) {
-                            presenter.searchNews(charSequence.toString(), 1);
+                            presenter.searchNews(charSequence.toString(), PAGE_START);
                         }
                     }
 
@@ -131,8 +131,8 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
             @Override
             protected void loadMoreItems() {
                 isLoading = true;
-                currentPage++; //Increment page index to load the next one
-                presenter.loadNextPage(editTextSearch.getText().toString(), currentPage);
+                currentPage++;
+                presenter.searchNews(editTextSearch.getText().toString(), currentPage);
             }
 
             @Override
@@ -155,36 +155,39 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     }
 
     @Override
-    public void showSearchResults(List<Article> newsList) {
+    public void showFirstPageResults(List<Article> newsList) {
         searchAdapter.addAll(newsList);
 
         progressBar.setVisibility(View.GONE);
 
-        if (currentPage <= TOTAL_PAGES) searchAdapter.addLoadingFooter();
-        else isLastPage = true;
+        if (currentPage <= TOTAL_PAGES) {
+            searchAdapter.addLoadingFooter();
+        } else {
+            isLastPage = true;
+        }
 
-        recyclerViewSearchResults.setVisibility(View.VISIBLE);
-        textViewNoResult.setVisibility(View.GONE);
+        shouldDisplayNoResultText(false);
     }
 
     @Override
-    public void showNextResults(List<Article> newsList) {
+    public void showNextPageResults(List<Article> newsList) {
         searchAdapter.removeLoadingFooter();
         isLoading = false;
         searchAdapter.addAll(newsList);
 
         progressBar.setVisibility(View.GONE);
-        if (currentPage != TOTAL_PAGES) searchAdapter.addLoadingFooter();
-        else isLastPage = true;
+        if (currentPage != TOTAL_PAGES) {
+            searchAdapter.addLoadingFooter();
+        } else {
+            isLastPage = true;
+        }
 
-        recyclerViewSearchResults.setVisibility(View.VISIBLE);
-        textViewNoResult.setVisibility(View.GONE);
+        shouldDisplayNoResultText(false);
     }
 
     @Override
     public void showNoResults() {
-        recyclerViewSearchResults.setVisibility(View.GONE);
-        textViewNoResult.setVisibility(View.VISIBLE);
+        shouldDisplayNoResultText(true);
     }
 
     @OnClick(R.id.imageView_search)
@@ -199,5 +202,15 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     private void setUpSearchBar() {
         imageViewSearch.setImageResource(R.drawable.ic_close);
         Utils.showKeyboard(getContext(), editTextSearch);
+    }
+
+    private void shouldDisplayNoResultText(boolean isVisible) {
+        if (isVisible) {
+            recyclerViewSearchResults.setVisibility(View.GONE);
+            textViewNoResult.setVisibility(View.VISIBLE);
+        } else {
+            recyclerViewSearchResults.setVisibility(View.VISIBLE);
+            textViewNoResult.setVisibility(View.GONE);
+        }
     }
 }

@@ -56,24 +56,11 @@ public class SearchPresenter implements SearchContract.Presenter {
                         if (articles.isEmpty()) {
                             view.showNoResults();
                         } else {
-                            view.showSearchResults(articles);
-                        }
-                    }
-                }, throwable -> view.toast(throwable.getMessage())));
-    }
-
-    @Override
-    public void loadNextPage(String keyword, int page) {
-        compositeDisposable.add(newsRepository.getNewsRemoteDataSource().searchNews(keyword, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(News::getArticles)
-                .subscribe(articles -> {
-                    if (view != null) {
-                        if (articles.isEmpty()) {
-                            view.showNoResults();
-                        } else {
-                            view.showNextResults(articles);
+                            if (page > 1) {
+                                view.showNextPageResults(articles);
+                            } else {
+                                view.showFirstPageResults(articles);
+                            }
                         }
                     }
                 }, throwable -> view.toast(throwable.getMessage())));
