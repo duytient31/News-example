@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.mario.newsapiexample.R;
+import com.mario.newsapiexample.components.adapter.AdapterItemDivider;
 import com.mario.newsapiexample.components.base.BaseDialogFragment;
 import com.mario.newsapiexample.components.ui.main.adapter.MainAdapter;
 import com.mario.newsapiexample.components.ui.main.search.SearchFragment;
@@ -18,6 +19,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.disposables.Disposable;
+
+/**
+ * Created by mario on 14/06/18.
+ */
 
 public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> implements NewsContract.View {
 
@@ -58,9 +63,11 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
 
         mainAdapter = new MainAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        final AdapterItemDivider adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
 
         recyclerViewNews.setLayoutManager(layoutManager);
         recyclerViewNews.setHasFixedSize(true);
+        recyclerViewNews.addItemDecoration(adapterItemDivider);
         recyclerViewNews.setAdapter(mainAdapter);
 
         editTextNews.setFocusable(false);

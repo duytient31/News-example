@@ -17,6 +17,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+/**
+ * Created by mario on 14/06/18.
+ */
+
 public class HeadlineAdapter extends BaseRecyclerViewAdapter<Article, BaseRecyclerViewAdapter.ItemBaseVH> {
 
     @NonNull
@@ -25,7 +29,7 @@ public class HeadlineAdapter extends BaseRecyclerViewAdapter<Article, BaseRecycl
         return new HeadlineVH((LayoutInflater.from(parent.getContext()).inflate(R.layout.item_headline, parent, false)));
     }
 
-    class HeadlineVH extends ItemBaseVH {
+    protected class HeadlineVH extends ItemBaseVH {
 
         @BindView(R.id.imageView_headline_photo)
         ImageView imageViewHeadlinePhoto;
@@ -36,7 +40,7 @@ public class HeadlineAdapter extends BaseRecyclerViewAdapter<Article, BaseRecycl
         @BindView(R.id.textView_headline_time)
         TextView textViewHeadlineTime;
 
-        public HeadlineVH(View itemView) {
+        HeadlineVH(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(view -> {

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mario.newsapiexample.R;
+import com.mario.newsapiexample.components.ui.main.adapter.viewholders.HeaderVH;
+import com.mario.newsapiexample.components.ui.main.adapter.viewholders.NewsVH;
 import com.mario.newsapiexample.data.model.news.Article;
 import com.mario.newsapiexample.util.Utils;
 
@@ -17,6 +19,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+/**
+ * Created by mario on 14/06/18.
+ */
 
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -65,16 +71,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType) {
             case TOP_HEADLINES_HEADER:
             case LATEST_NEWS_HEADER:
-                holder = new HeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_recyclerview_header, parent, false));
+                holder = new HeaderVH(LayoutInflater.from(context).inflate(R.layout.layout_recyclerview_header, parent, false));
                 break;
             case TOP_HEADLINES_LIST:
-                holder = new HeadlinesViewHolder(LayoutInflater.from(context).inflate(R.layout.item_recyclerview_headline, parent, false));
+                holder = new HeadlinesVH(LayoutInflater.from(context).inflate(R.layout.item_recyclerview_headline, parent, false));
                 break;
             case LATEST_NEWS_LIST:
-                holder = new NewsViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false));
+                holder = new NewsVH(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false));
                 break;
             default:
-                holder = new NewsViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false));
+                holder = new NewsVH(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false));
                 break;
         }
         return holder;
@@ -84,26 +90,25 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case LATEST_NEWS_LIST:
-                ((NewsViewHolder) holder).textViewNewsTitle.setText(newsList.get(position).getTitle());
-                ((NewsViewHolder) holder).textViewNewsDescription.setText(newsList.get(position).getDescription());
-                ((NewsViewHolder) holder).textViewNewsTime.setText(Utils.convertDate(newsList.get(position).getPublishedAt()));
-                ((NewsViewHolder) holder).textViewNewsSource.setText(newsList.get(position).getSource().getName());
+                ((NewsVH) holder).textViewNewsTitle.setText(newsList.get(position).getTitle());
+                ((NewsVH) holder).textViewNewsDescription.setText(newsList.get(position).getDescription());
+                ((NewsVH) holder).textViewNewsTime.setText(Utils.convertDate(newsList.get(position).getPublishedAt()));
+                ((NewsVH) holder).textViewNewsSource.setText(newsList.get(position).getSource().getName());
                 break;
             case TOP_HEADLINES_LIST:
                 HeadlineAdapter headlineAdapter = new HeadlineAdapter();
                 headlineAdapter.setItems(headlinesList);
-                ((HeadlinesViewHolder) holder).recyclerViewHeadlines.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-                ((HeadlinesViewHolder) holder).recyclerViewHeadlines.setAdapter(headlineAdapter);
+                ((HeadlinesVH) holder).recyclerViewHeadlines.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                ((HeadlinesVH) holder).recyclerViewHeadlines.setAdapter(headlineAdapter);
                 break;
             case TOP_HEADLINES_HEADER:
-                ((HeaderViewHolder) holder).textViewHeader.setText(R.string.top_headlines);
+                ((HeaderVH) holder).textViewHeader.setText(R.string.top_headlines);
                 break;
             case LATEST_NEWS_HEADER:
-                ((HeaderViewHolder) holder).textViewHeader.setText(R.string.latest_news);
+                ((HeaderVH) holder).textViewHeader.setText(R.string.latest_news);
                 break;
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -111,37 +116,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    public class HeadlinesViewHolder extends RecyclerView.ViewHolder {
+    /** View holders **/
+
+    protected class HeadlinesVH extends RecyclerView.ViewHolder {
         @BindView(R.id.recyclerView_item_headline)
         RecyclerView recyclerViewHeadlines;
 
-        HeadlinesViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
-
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textView_news_title)
-        TextView textViewNewsTitle;
-        @BindView(R.id.textView_news_description)
-        TextView textViewNewsDescription;
-        @BindView(R.id.textView_news_time)
-        TextView textViewNewsTime;
-        @BindView(R.id.textView_news_source)
-        TextView textViewNewsSource;
-
-        NewsViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
-
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textView_header_news)
-        TextView textViewHeader;
-
-        HeaderViewHolder(View itemView) {
+        HeadlinesVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

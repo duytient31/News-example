@@ -9,6 +9,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Created by mario on 14/06/18.
+ */
+
 public class NewsPresenter implements NewsContract.Presenter {
 
     private NewsContract.View view;

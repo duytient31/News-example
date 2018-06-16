@@ -3,6 +3,7 @@ package com.mario.newsapiexample.network;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,6 +17,7 @@ public class ApiService {
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static ApiKeyInterceptor interceptor = new ApiKeyInterceptor();
+    private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -25,14 +27,15 @@ public class ApiService {
     private static Retrofit retrofit = builder.build();
 
     public static <S> S createService(Class<S> serviceClass) {
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         if (!httpClient.interceptors().contains(interceptor)) {
             httpClient.addInterceptor(interceptor);
+            httpClient.addInterceptor(logging);
 
             builder.client(httpClient.build());
             retrofit = builder.build();
 
         }
-
         return retrofit.create(serviceClass);
     }
 }

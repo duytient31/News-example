@@ -15,6 +15,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+/**
+ * Created by mario on 14/06/18.
+ */
+
 public class NewsAdapter extends BaseRecyclerViewAdapter<Article, BaseRecyclerViewAdapter.ItemBaseVH> {
 
     @Inject

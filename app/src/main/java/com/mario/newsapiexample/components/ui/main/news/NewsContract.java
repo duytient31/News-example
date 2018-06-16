@@ -6,6 +6,10 @@ import com.mario.newsapiexample.data.model.news.Article;
 
 import java.util.List;
 
+/**
+ * Created by mario on 14/06/18.
+ */
+
 public interface NewsContract {
     interface Presenter extends BasePresenter<View> {
         void fetchTopHeadlines();

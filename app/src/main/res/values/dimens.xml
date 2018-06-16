@@ -16,5 +16,6 @@
     <dimen name="textview_H3_size">15sp</dimen>
     <dimen name="textview_H4_size">16sp</dimen>
     <dimen name="textview_H5_size">14sp</dimen>
+    <dimen name="image_headline_height">220dp</dimen>
 
 </resources>

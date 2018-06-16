@@ -1,18 +1,27 @@
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    android:elevation="4dp"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:contentInsetEnd="0dp"
-    app:contentInsetLeft="0dp"
-    app:contentInsetRight="0dp"
-    app:contentInsetStart="0dp"
-    app:contentInsetStartWithNavigation="0dp"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_small"
+    android:background="@drawable/edittext_background"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-    <include layout="@layout/view_searchview" />
+    <ImageView
+        android:id="@+id/imageView_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:src="@drawable/ic_search" />
 
-</android.support.v7.widget.Toolbar>
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_huge"
+        android:background="@android:color/transparent"
+        android:hint="@string/search_latest_news"
+        android:inputType="text"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/colorGray300"
+        android:textSize="@dimen/textview_H4_size" />
+</LinearLayout>

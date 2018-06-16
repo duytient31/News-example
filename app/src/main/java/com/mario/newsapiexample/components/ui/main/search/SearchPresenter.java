@@ -9,6 +9,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Created by mario on 14/06/18.
+ */
+
 public class SearchPresenter implements SearchContract.Presenter {
 
     private SearchContract.View view;
@@ -53,6 +57,23 @@ public class SearchPresenter implements SearchContract.Presenter {
                             view.showNoResults();
                         } else {
                             view.showSearchResults(articles);
+                        }
+                    }
+                }, throwable -> view.toast(throwable.getMessage())));
+    }
+
+    @Override
+    public void loadNextPage(String keyword, int page) {
+        compositeDisposable.add(newsRepository.getNewsRemoteDataSource().searchNews(keyword, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(News::getArticles)
+                .subscribe(articles -> {
+                    if (view != null) {
+                        if (articles.isEmpty()) {
+                            view.showNoResults();
+                        } else {
+                            view.showNextResults(articles);
                         }
                     }
                 }, throwable -> view.toast(throwable.getMessage())));
