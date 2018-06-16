@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp">
+    <include layout="@layout/layout_search" />
 
-        <SearchView
-            android:id="@+id/searchview_news"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_no_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_small"
-            android:background="@drawable/searchview_rounded_background"
-            android:iconifiedByDefault="false"
-            android:inputType="text"
-            android:queryBackground="@android:color/transparent"
-            android:queryHint="@string/search_latest_news"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorGray300"
-            android:textSize="@dimen/textview_H4_size" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/no_result"
+            android:textColor="@color/colorGray300"
+            android:textSize="@dimen/textview_H2_size"
+            android:visibility="gone" />
 
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_news"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    </FrameLayout>
 
 </LinearLayout>

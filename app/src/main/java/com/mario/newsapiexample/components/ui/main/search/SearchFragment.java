@@ -1,18 +1,22 @@
-package com.mario.newsapiexample.components.ui.main;
+package com.mario.newsapiexample.components.ui.main.search;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.SearchView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.jakewharton.rxbinding2.widget.RxSearchView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.base.BaseDialogFragment;
-import com.mario.newsapiexample.components.di.ActivityScoped;
-import com.mario.newsapiexample.components.ui.main.adapter.MainAdapter;
+import com.mario.newsapiexample.components.ui.main.adapter.SearchAdapter;
+import com.mario.newsapiexample.components.ui.main.news.NewsFragment;
 import com.mario.newsapiexample.data.model.news.Article;
+import com.mario.newsapiexample.util.Utils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,35 +24,36 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-/**
- * Created by mario on 11/06/18.
- */
-
-@ActivityScoped
-public class MainFragment extends BaseDialogFragment<MainContract.Presenter> implements MainContract.View {
+public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter> implements SearchContract.View {
 
     @Inject
-    MainContract.Presenter presenter;
+    SearchContract.Presenter presenter;
 
-    @Inject
-    public MainFragment() {
-    }
+    @BindView(R.id.editText_search)
+    EditText searchViewNews;
+    @BindView(R.id.recyclerView_search_results)
+    RecyclerView recyclerVieSearchResults;
+    @BindView(R.id.imageView_search)
+    ImageView imageViewSearch;
+    @BindView(R.id.textView_no_result)
+    TextView textViewNoResult;
 
-    @BindView(R.id.recyclerView_news)
-    RecyclerView recyclerViewNews;
-    @BindView(R.id.searchview_news)
-    SearchView searchViewNews;
+    private SearchAdapter mainAdapter;
 
-    private MainAdapter mainAdapter;
     private LinearLayoutManager layoutManager;
     private Disposable disposable;
 
+    @Inject
+    public SearchFragment() {
+    }
+
     @Override
-    protected MainContract.Presenter getPresenter() {
+    protected SearchContract.Presenter getPresenter() {
         return presenter;
     }
 
@@ -62,18 +67,18 @@ public class MainFragment extends BaseDialogFragment<MainContract.Presenter> imp
         super.onActivityCreated(savedInstanceState);
         if (presenter != null) {
             presenter.setView(this);
-            presenter.fetchLatestNews();
-            presenter.fetchTopHeadlines();
         }
 
-        mainAdapter = new MainAdapter(getContext());
+        setUpSearchBar();
+
+        mainAdapter = new SearchAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
-        recyclerViewNews.setLayoutManager(layoutManager);
-        recyclerViewNews.setHasFixedSize(true);
-        recyclerViewNews.setAdapter(mainAdapter);
+        recyclerVieSearchResults.setLayoutManager(layoutManager);
+        recyclerVieSearchResults.setHasFixedSize(true);
+        recyclerVieSearchResults.setAdapter(mainAdapter);
 
-        RxSearchView.queryTextChanges(searchViewNews)
+        RxTextView.textChanges(searchViewNews)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CharSequence>() {
@@ -103,19 +108,30 @@ public class MainFragment extends BaseDialogFragment<MainContract.Presenter> imp
     }
 
     @Override
-    public void showTopHeadlines(List<Article> headlinesList) {
-        mainAdapter.setHeadlineItems(headlinesList);
-    }
-
-    @Override
-    public void showLatestNews(List<Article> newsList) {
-        mainAdapter.setNewsItems(newsList);
-    }
-
-    @Override
     public void showSearchResults(List<Article> newsList) {
         mainAdapter.setNewsItems(newsList);
-        mainAdapter.notifyDataSetChanged();
 
+        recyclerVieSearchResults.setVisibility(View.VISIBLE);
+        textViewNoResult.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoResults() {
+        recyclerVieSearchResults.setVisibility(View.GONE);
+        textViewNoResult.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.imageView_search)
+    public void onClick() {
+        Utils.hideKeyboard(getContext(), searchViewNews);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(getId(), new NewsFragment())
+                .addToBackStack(null).commit();
+    }
+
+    private void setUpSearchBar() {
+        imageViewSearch.setImageResource(R.drawable.ic_close);
+        Utils.showKeyboard(getContext(), searchViewNews);
     }
 }

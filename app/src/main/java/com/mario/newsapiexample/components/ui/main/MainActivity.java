@@ -3,6 +3,7 @@ package com.mario.newsapiexample.components.ui.main;
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.base.BaseActivity;
 import com.mario.newsapiexample.components.base.BaseFragment;
+import com.mario.newsapiexample.components.ui.main.news.NewsFragment;
 
 import javax.inject.Inject;
 
@@ -13,7 +14,7 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity {
 
     @Inject
-    MainFragment searchFragment;
+    NewsFragment newsFragment;
 
     @Override
     protected int getLayoutId() {
@@ -22,7 +23,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected BaseFragment getFragment() {
-        return searchFragment;
+        return newsFragment;
     }
 
     @Override

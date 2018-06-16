@@ -1,4 +1,4 @@
-package com.mario.newsapiexample.components.ui.main;
+package com.mario.newsapiexample.components.ui.main.news;
 
 import com.mario.newsapiexample.data.model.news.News;
 import com.mario.newsapiexample.data.source.news.NewsRepository;
@@ -9,18 +9,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by mario on 11/06/18.
- */
+public class NewsPresenter implements NewsContract.Presenter {
 
-public class MainPresenter implements MainContract.Presenter {
-
-    private MainContract.View view;
+    private NewsContract.View view;
     private NewsRepository newsRepository;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    MainPresenter() {
+    NewsPresenter() {
     }
 
     @Override
@@ -40,7 +36,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void setView(MainContract.View view) {
+    public void setView(NewsContract.View view) {
         this.view = view;
         newsRepository = new NewsRepository();
     }
@@ -54,6 +50,10 @@ public class MainPresenter implements MainContract.Presenter {
                 .subscribe(articles -> {
                     if (view != null) {
                         view.showTopHeadlines(articles);
+                    }
+                }, throwable -> {
+                    if (view != null) {
+                        view.toast(throwable.getMessage());
                     }
                 }));
     }
@@ -69,19 +69,10 @@ public class MainPresenter implements MainContract.Presenter {
                             if (view != null) {
                                 view.showLatestNews(articles);
                             }
+                        }, throwable -> {
+                            if (view != null) {
+                                view.toast(throwable.getMessage());
+                            }
                         }));
-    }
-
-    @Override
-    public void searchNews(String keyword, int page) {
-        compositeDisposable.add(newsRepository.getNewsRemoteDataSource().searchNews(keyword, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(News::getArticles)
-                .subscribe(articles -> {
-                    if (view != null) {
-                        view.showSearchResults(articles);
-                    }
-                }, throwable -> view.toast(throwable.getMessage())));
     }
 }

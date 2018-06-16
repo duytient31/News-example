@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">NewsExample</string>
+    <string name="app_name">News</string>
 
     <string name="search_latest_news">Search latest news…</string>
     <string name="latest_news">Latest News</string>
     <string name="top_headlines">Top Headlines</string>
     <string name="search_results">Search Results</string>
+    <string name="no_result">No result</string>
 </resources>
