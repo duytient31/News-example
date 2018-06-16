@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".components.ui.main.MainActivity"
+            android:name=".components.ui.main.news.NewsActivity"
             android:screenOrientation="portrait" />
     </application>
 

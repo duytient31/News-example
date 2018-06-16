@@ -1,4 +1,4 @@
-package com.mario.newsapiexample.components.ui.main;
+package com.mario.newsapiexample.components.ui.main.news;
 
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.base.BaseActivity;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * Created by mario on 11/06/18.
  */
 
-public class MainActivity extends BaseActivity {
+public class NewsActivity extends BaseActivity {
 
     @Inject
     NewsFragment newsFragment;

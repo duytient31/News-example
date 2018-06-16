@@ -1,10 +1,7 @@
-package com.mario.newsapiexample.components.ui.main;
+package com.mario.newsapiexample.components.ui.main.news;
 
 import com.mario.newsapiexample.components.di.ActivityScoped;
 import com.mario.newsapiexample.components.di.FragmentScoped;
-import com.mario.newsapiexample.components.ui.main.news.NewsContract;
-import com.mario.newsapiexample.components.ui.main.news.NewsFragment;
-import com.mario.newsapiexample.components.ui.main.news.NewsPresenter;
 import com.mario.newsapiexample.components.ui.main.search.SearchContract;
 import com.mario.newsapiexample.components.ui.main.search.SearchFragment;
 import com.mario.newsapiexample.components.ui.main.search.SearchPresenter;
@@ -18,7 +15,7 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class MainModule {
+public abstract class NewsModule {
 
     @ActivityScoped
     @Binds
