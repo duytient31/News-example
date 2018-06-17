@@ -66,4 +66,11 @@ public class SearchPresenter implements SearchContract.Presenter {
                 }, throwable -> view.toast(throwable.getMessage())));
     }
 
+    @Override
+    public void onSearchCloseClicked() {
+        if (view != null) {
+            view.replaceFragment();
+        }
+    }
+
 }

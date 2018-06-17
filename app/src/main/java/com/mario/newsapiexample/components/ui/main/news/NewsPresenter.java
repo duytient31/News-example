@@ -79,4 +79,11 @@ public class NewsPresenter implements NewsContract.Presenter {
                             }
                         }));
     }
+
+    @Override
+    public void onSearchClicked() {
+        if (view != null){
+            view.replaceFragment();
+        }
+    }
 }

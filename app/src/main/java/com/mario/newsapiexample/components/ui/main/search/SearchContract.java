@@ -13,6 +13,8 @@ import java.util.List;
 public interface SearchContract {
     interface Presenter extends BasePresenter<View> {
         void searchNews(String keyword, int page);
+
+        void onSearchCloseClicked();
     }
 
     interface View extends BaseDialogView<Presenter> {
@@ -21,5 +23,7 @@ public interface SearchContract {
         void showNextPageResults(List<Article> newsList);
 
         void showNoResults();
+
+        void replaceFragment();
     }
 }

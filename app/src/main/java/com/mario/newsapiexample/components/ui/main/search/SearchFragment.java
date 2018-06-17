@@ -148,8 +148,29 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
                 return isLoading;
             }
         });
+    }
 
 
+    private void setUpSearchBar() {
+        imageViewSearch.setImageResource(R.drawable.ic_close);
+        Utils.showKeyboard(getContext(), editTextSearch);
+    }
+
+    private void shouldDisplayNoResultText(boolean isVisible) {
+        if (isVisible) {
+            recyclerViewSearchResults.setVisibility(View.GONE);
+            textViewNoResult.setVisibility(View.VISIBLE);
+        } else {
+            recyclerViewSearchResults.setVisibility(View.VISIBLE);
+            textViewNoResult.setVisibility(View.GONE);
+        }
+    }
+
+    private void setUpRecyclerView() {
+        recyclerViewSearchResults.setLayoutManager(layoutManager);
+        recyclerViewSearchResults.setHasFixedSize(true);
+        recyclerViewSearchResults.addItemDecoration(adapterItemDivider);
+        recyclerViewSearchResults.setAdapter(searchAdapter);
     }
 
     @Override
@@ -185,34 +206,17 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
         shouldDisplayNoResultText(true);
     }
 
-    @OnClick(R.id.imageView_search)
-    public void onClick() {
-        Utils.hideKeyboard(getContext(), editTextSearch);
+    @Override
+    public void replaceFragment() {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(getId(), new NewsFragment())
                 .addToBackStack(null).commit();
     }
 
-    private void setUpSearchBar() {
-        imageViewSearch.setImageResource(R.drawable.ic_close);
-        Utils.showKeyboard(getContext(), editTextSearch);
-    }
-
-    private void shouldDisplayNoResultText(boolean isVisible) {
-        if (isVisible) {
-            recyclerViewSearchResults.setVisibility(View.GONE);
-            textViewNoResult.setVisibility(View.VISIBLE);
-        } else {
-            recyclerViewSearchResults.setVisibility(View.VISIBLE);
-            textViewNoResult.setVisibility(View.GONE);
-        }
-    }
-
-    private void setUpRecyclerView() {
-        recyclerViewSearchResults.setLayoutManager(layoutManager);
-        recyclerViewSearchResults.setHasFixedSize(true);
-        recyclerViewSearchResults.addItemDecoration(adapterItemDivider);
-        recyclerViewSearchResults.setAdapter(searchAdapter);
+    @OnClick(R.id.imageView_search)
+    public void onClick() {
+        Utils.hideKeyboard(getContext(), editTextSearch);
+        presenter.onSearchCloseClicked();
     }
 }

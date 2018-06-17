@@ -15,11 +15,15 @@ public interface NewsContract {
         void fetchTopHeadlines();
 
         void fetchLatestNews();
+
+        void onSearchClicked();
     }
 
     interface View extends BaseDialogView<Presenter> {
         void showTopHeadlines(List<Article> headlinesList);
 
         void showLatestNews(List<Article> newsList);
+
+        void replaceFragment();
     }
 }

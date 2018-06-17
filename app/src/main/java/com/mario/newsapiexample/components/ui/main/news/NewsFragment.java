@@ -18,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -69,14 +70,14 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
         setUpRecyclerView();
 
         editTextNews.setFocusable(false);
-        editTextNews.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(getId(), new SearchFragment())
-                    .addToBackStack(null).commit();
-        });
     }
 
+    private void setUpRecyclerView() {
+        recyclerViewNews.setLayoutManager(layoutManager);
+        recyclerViewNews.setHasFixedSize(true);
+        recyclerViewNews.addItemDecoration(adapterItemDivider);
+        recyclerViewNews.setAdapter(newsAdapter);
+    }
 
     @Override
     public void showTopHeadlines(List<Article> headlinesList) {
@@ -88,11 +89,22 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
         newsAdapter.setNewsItems(newsList);
     }
 
-    private void setUpRecyclerView() {
-        recyclerViewNews.setLayoutManager(layoutManager);
-        recyclerViewNews.setHasFixedSize(true);
-        recyclerViewNews.addItemDecoration(adapterItemDivider);
-        recyclerViewNews.setAdapter(newsAdapter);
+    @Override
+    public void replaceFragment() {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(getId(), new SearchFragment())
+                .addToBackStack(null).commit();
     }
 
+    @OnClick(R.id.editText_search)
+    public void onClick(){
+        presenter.onSearchClicked();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
+    }
 }
