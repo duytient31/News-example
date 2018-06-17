@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/no_result"
+            android:text="@string/no_results"
             android:textColor="@color/colorGray300"
             android:textSize="@dimen/textview_H2_size"
             android:visibility="gone" />

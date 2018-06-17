@@ -2,7 +2,6 @@ package com.mario.newsapiexample.components.ui.main.search;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,10 +52,12 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
 
+    private Disposable disposable;
+
     private SearchAdapter searchAdapter;
 
     private LinearLayoutManager layoutManager;
-    private Disposable disposable;
+    private AdapterItemDivider adapterItemDivider;
 
     private static final int PAGE_START = 1;
     // Indicates if footer ProgressBar is shown (i.e. next page is loading)
@@ -87,17 +88,14 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
             presenter.setView(this);
         }
 
-        setUpSearchBar();
+        progressBar.setVisibility(View.GONE);
 
         searchAdapter = new SearchAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        final AdapterItemDivider adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
+        adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
 
-        recyclerViewSearchResults.setLayoutManager(layoutManager);
-        recyclerViewSearchResults.setHasFixedSize(true);
-        recyclerViewSearchResults.addItemDecoration(adapterItemDivider);
-        recyclerViewSearchResults.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewSearchResults.setAdapter(searchAdapter);
+        setUpSearchBar();
+        setUpRecyclerView();
 
         RxTextView.textChanges(editTextSearch)
                 .debounce(500, TimeUnit.MILLISECONDS)
@@ -158,8 +156,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     public void showFirstPageResults(List<Article> newsList) {
         searchAdapter.addAll(newsList);
 
-        progressBar.setVisibility(View.GONE);
-
         if (currentPage <= TOTAL_PAGES) {
             searchAdapter.addLoadingFooter();
         } else {
@@ -175,7 +171,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
         isLoading = false;
         searchAdapter.addAll(newsList);
 
-        progressBar.setVisibility(View.GONE);
         if (currentPage != TOTAL_PAGES) {
             searchAdapter.addLoadingFooter();
         } else {
@@ -212,5 +207,12 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
             recyclerViewSearchResults.setVisibility(View.VISIBLE);
             textViewNoResult.setVisibility(View.GONE);
         }
+    }
+
+    private void setUpRecyclerView() {
+        recyclerViewSearchResults.setLayoutManager(layoutManager);
+        recyclerViewSearchResults.setHasFixedSize(true);
+        recyclerViewSearchResults.addItemDecoration(adapterItemDivider);
+        recyclerViewSearchResults.setAdapter(searchAdapter);
     }
 }

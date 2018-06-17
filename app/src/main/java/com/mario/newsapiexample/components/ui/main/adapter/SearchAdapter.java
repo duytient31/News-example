@@ -46,25 +46,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public void remove(Article article) {
-        int position = resultsList.indexOf(article);
-        if (position > -1) {
-            resultsList.remove(position);
-            notifyItemRemoved(position);
-        }
-    }
-
-    public void clear() {
-        isLoadingAdded = false;
-        while (getItemCount() > 0) {
-            remove(getItem(0));
-        }
-    }
-
-    public boolean isEmpty() {
-        return getItemCount() == 0;
-    }
-
     public void addLoadingFooter() {
         isLoadingAdded = true;
         add(new Article());

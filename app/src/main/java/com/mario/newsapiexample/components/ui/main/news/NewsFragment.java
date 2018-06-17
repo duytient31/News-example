@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.adapter.AdapterItemDivider;
 import com.mario.newsapiexample.components.base.BaseDialogFragment;
-import com.mario.newsapiexample.components.ui.main.adapter.MainAdapter;
+import com.mario.newsapiexample.components.ui.main.adapter.NewsAdapter;
 import com.mario.newsapiexample.components.ui.main.search.SearchFragment;
 import com.mario.newsapiexample.data.model.news.Article;
 
@@ -34,9 +34,10 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
     @BindView(R.id.editText_search)
     EditText editTextNews;
 
-    private MainAdapter mainAdapter;
-    private LinearLayoutManager layoutManager;
     private Disposable disposable;
+    private NewsAdapter newsAdapter;
+    private LinearLayoutManager layoutManager;
+    private AdapterItemDivider adapterItemDivider;
 
     @Inject
     public NewsFragment() {
@@ -61,17 +62,13 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
             presenter.fetchTopHeadlines();
         }
 
-        mainAdapter = new MainAdapter(getContext());
+        newsAdapter = new NewsAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        final AdapterItemDivider adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
+        adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
 
-        recyclerViewNews.setLayoutManager(layoutManager);
-        recyclerViewNews.setHasFixedSize(true);
-        recyclerViewNews.addItemDecoration(adapterItemDivider);
-        recyclerViewNews.setAdapter(mainAdapter);
+        setUpRecyclerView();
 
         editTextNews.setFocusable(false);
-
         editTextNews.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
@@ -83,12 +80,19 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
 
     @Override
     public void showTopHeadlines(List<Article> headlinesList) {
-        mainAdapter.setHeadlineItems(headlinesList);
+        newsAdapter.setHeadlineItems(headlinesList);
     }
 
     @Override
     public void showLatestNews(List<Article> newsList) {
-        mainAdapter.setNewsItems(newsList);
+        newsAdapter.setNewsItems(newsList);
+    }
+
+    private void setUpRecyclerView() {
+        recyclerViewNews.setLayoutManager(layoutManager);
+        recyclerViewNews.setHasFixedSize(true);
+        recyclerViewNews.addItemDecoration(adapterItemDivider);
+        recyclerViewNews.setAdapter(newsAdapter);
     }
 
 }
