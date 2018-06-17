@@ -9,7 +9,7 @@
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_huge">36dp</dimen>
 
-    <dimen name="textview_header_size">36sp</dimen>
+    <dimen name="textview_header_size">32sp</dimen>
     <dimen name="textview_H0_size">24sp</dimen>
     <dimen name="textview_H1_size">18sp</dimen>
     <dimen name="textview_H2_size">17sp</dimen>
@@ -17,5 +17,6 @@
     <dimen name="textview_H4_size">16sp</dimen>
     <dimen name="textview_H5_size">14sp</dimen>
     <dimen name="image_headline_height">220dp</dimen>
+    <dimen name="layout_item_recyclerview_headline_width">320dp</dimen>
 
 </resources>

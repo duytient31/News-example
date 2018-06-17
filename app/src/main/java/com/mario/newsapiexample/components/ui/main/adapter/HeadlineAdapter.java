@@ -10,6 +10,7 @@ import com.mario.newsapiexample.R;
 import com.mario.newsapiexample.components.ui.main.adapter.viewholders.HeadlineVH;
 import com.mario.newsapiexample.data.model.news.Article;
 import com.mario.newsapiexample.util.Utils;
+import com.mario.newsapiexample.view.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Picasso.with(context)
                 .load(headlinesList.get(position).getUrlToImage())
+                .transform(new RoundedCornersTransformation(8, 0))
                 .into(((HeadlineVH) holder).imageViewHeadlinePhoto);
 
         ((HeadlineVH) holder).textViewHeadlineTitle.setText(headlinesList.get(position).getTitle());

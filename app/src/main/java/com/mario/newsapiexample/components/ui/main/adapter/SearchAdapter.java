@@ -92,7 +92,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RecyclerView.ViewHolder holder;
         switch (viewType) {
             case SEARCH_HEADER:
-                holder = new HeaderVH(LayoutInflater.from(context).inflate(R.layout.layout_recyclerview_header, parent, false));
+                holder = new HeaderVH(LayoutInflater.from(context).inflate(R.layout.item_header, parent, false));
                 break;
             case SEARCH_LIST:
                 holder = new NewsVH(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false));

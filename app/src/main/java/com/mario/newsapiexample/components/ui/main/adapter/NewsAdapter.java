@@ -69,7 +69,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType) {
             case TOP_HEADLINES_HEADER:
             case LATEST_NEWS_HEADER:
-                holder = new HeaderVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_recyclerview_header, parent, false));
+                holder = new HeaderVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header, parent, false));
                 break;
             case TOP_HEADLINES_LIST:
                 holder = new HeadlineRecyclerViewVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_headline, parent, false));
