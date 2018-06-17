@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dagger.Lazy;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -37,6 +38,9 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
 
     @Inject
     NewsAdapter newsAdapter;
+
+    @Inject
+    Lazy<SearchFragment> searchFragmentLazy;
 
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
@@ -93,7 +97,7 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
     public void replaceFragment() {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(getId(), new SearchFragment())
+                .replace(getId(), searchFragmentLazy.get())
                 .addToBackStack(null).commit();
     }
 

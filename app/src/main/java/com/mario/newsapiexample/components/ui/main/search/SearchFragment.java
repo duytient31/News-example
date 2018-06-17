@@ -28,6 +28,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dagger.Lazy;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 
@@ -53,6 +54,9 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
 
     @Inject
     SearchAdapter searchAdapter;
+
+    @Inject
+    Lazy<NewsFragment> newsFragmentLazy;
 
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
@@ -181,7 +185,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     public void replaceFragment() {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(getId(), new NewsFragment())
+                .replace(getId(), newsFragmentLazy.get())
                 .addToBackStack(null).commit();
     }
 
