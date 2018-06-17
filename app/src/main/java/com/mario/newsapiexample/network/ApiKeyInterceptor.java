@@ -20,7 +20,6 @@ public class ApiKeyInterceptor implements Interceptor {
                 .addQueryParameter("apiKey", Keys.NEWS_API_KEY)
                 .build();
 
-        // Request customization: add request headers
         Request.Builder requestBuilder = original.newBuilder()
                 .url(url);
 

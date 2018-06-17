@@ -35,7 +35,6 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
     @BindView(R.id.editText_search)
     EditText editTextNews;
 
-    private Disposable disposable;
     private NewsAdapter newsAdapter;
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
@@ -98,13 +97,7 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
     }
 
     @OnClick(R.id.editText_search)
-    public void onClick(){
+    public void onClick() {
         presenter.onSearchClicked();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        disposable.dispose();
     }
 }

@@ -1,5 +1,6 @@
 package com.mario.newsapiexample.components.ui.main.search;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.mario.newsapiexample.data.model.news.News;
 import com.mario.newsapiexample.data.source.news.NewsRepository;
 
@@ -64,7 +65,11 @@ public class SearchPresenter implements SearchContract.Presenter {
                                 }
                             }
                         }, throwable -> {
-                            view.toast(throwable.getMessage());
+                            if (((HttpException) throwable).code() == 429) {
+                                view.showNoMorePages();
+                            } else {
+                                view.toast(throwable.getMessage());
+                            }
                         }
                 ));
     }

@@ -55,7 +55,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     private Disposable disposable;
 
     private SearchAdapter searchAdapter;
-
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
 
@@ -194,9 +193,22 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
                 .addToBackStack(null).commit();
     }
 
+    @Override
+    public void showNoMorePages() {
+        searchAdapter.removeLoadingFooter();
+    }
+
     @OnClick(R.id.imageView_search)
     public void onClick() {
         Utils.hideKeyboard(getContext(), editTextSearch);
         presenter.onSearchCloseClicked();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 }

@@ -25,5 +25,7 @@ public interface SearchContract {
         void showNoResults();
 
         void replaceFragment();
+
+        void showNoMorePages();
     }
 }
