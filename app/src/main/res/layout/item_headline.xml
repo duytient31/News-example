@@ -41,6 +41,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorGray500"
         android:textSize="@dimen/textview_H5_size"
-        tools:text="2 hours ago" />
+        android:text="@string/published_ago" />
 
 </LinearLayout>

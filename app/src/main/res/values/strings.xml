@@ -6,4 +6,6 @@
     <string name="top_headlines">Top Headlines</string>
     <string name="search_results">Search Results</string>
     <string name="no_results">No results</string>
+    <string name="published_ago">%s</string>
+    <string name="published_ago_by">%s by</string>
 </resources>

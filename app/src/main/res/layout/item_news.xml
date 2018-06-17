@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorGray500"
             android:textSize="@dimen/textview_H5_size"
-            tools:text="2 hours ago by" />
+            android:text="@string/published_ago_by" />
 
         <TextView
             android:id="@+id/textView_news_source"

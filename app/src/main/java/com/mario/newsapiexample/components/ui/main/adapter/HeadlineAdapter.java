@@ -45,7 +45,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         ((HeadlineVH) holder).textViewHeadlineTitle.setText(headlinesList.get(position).getTitle());
         ((HeadlineVH) holder).textViewHeadlineSource.setText(headlinesList.get(position).getSource().getName());
-        ((HeadlineVH) holder).textViewHeadlineTime.setText(Utils.convertDate(headlinesList.get(position).getPublishedAt()));
+        ((HeadlineVH) holder).textViewHeadlineTime.setText(context.getString(R.string.published_ago, Utils.calculateTimePassed(headlinesList.get(position).getPublishedAt())));
     }
 
     @Override

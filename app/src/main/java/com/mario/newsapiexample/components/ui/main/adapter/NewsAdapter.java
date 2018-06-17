@@ -90,7 +90,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case LATEST_NEWS_LIST:
                 ((NewsVH) holder).textViewNewsTitle.setText(newsList.get(position).getTitle());
                 ((NewsVH) holder).textViewNewsDescription.setText(newsList.get(position).getDescription());
-                ((NewsVH) holder).textViewNewsTime.setText(Utils.convertDate(newsList.get(position).getPublishedAt()));
+                ((NewsVH) holder).textViewNewsTime.setText(context.getString(R.string.published_ago_by, Utils.calculateTimePassed(newsList.get(position).getPublishedAt())));
                 ((NewsVH) holder).textViewNewsSource.setText(newsList.get(position).getSource().getName());
                 break;
             case TOP_HEADLINES_LIST:

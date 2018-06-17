@@ -46,6 +46,25 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public void remove(Article article) {
+        int position = resultsList.indexOf(article);
+        if (position > -1) {
+            resultsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void clear() {
+        isLoadingAdded = false;
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    public boolean isEmpty() {
+        return getItemCount() == 0;
+    }
+
     public void addLoadingFooter() {
         isLoadingAdded = true;
         add(new Article());
@@ -94,7 +113,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case SEARCH_LIST:
                 ((NewsVH) holder).textViewNewsTitle.setText(resultsList.get(position).getTitle());
                 ((NewsVH) holder).textViewNewsDescription.setText(resultsList.get(position).getDescription());
-                ((NewsVH) holder).textViewNewsTime.setText(Utils.convertDate(resultsList.get(position).getPublishedAt()));
+                ((NewsVH) holder).textViewNewsTime.setText(context.getString(R.string.published_ago_by, Utils.calculateTimePassed(resultsList.get(position).getPublishedAt())));
                 ((NewsVH) holder).textViewNewsSource.setText(resultsList.get(position).getSource().getName());
                 break;
             case SEARCH_HEADER:

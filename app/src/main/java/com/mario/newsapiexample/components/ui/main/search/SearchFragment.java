@@ -62,10 +62,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     private static final int PAGE_START = 1;
     // Indicates if footer ProgressBar is shown (i.e. next page is loading)
     private boolean isLoading = false;
-    // If current page is the last page (Pagination will stop after this page load)
-    private boolean isLastPage = false;
-    private int TOTAL_PAGES = 3;
-    private int currentPage = PAGE_START;
+    private int currentPage;
 
     @Inject
     public SearchFragment() {
@@ -108,6 +105,8 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
 
                     @Override
                     public void onNext(CharSequence charSequence) {
+                        searchAdapter.clear();
+                        currentPage = PAGE_START;
                         if (charSequence.length() != 0) {
                             presenter.searchNews(charSequence.toString(), PAGE_START);
                         }
@@ -131,16 +130,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
                 isLoading = true;
                 currentPage++;
                 presenter.searchNews(editTextSearch.getText().toString(), currentPage);
-            }
-
-            @Override
-            public int getTotalPageCount() {
-                return TOTAL_PAGES;
-            }
-
-            @Override
-            public boolean isLastPage() {
-                return isLastPage;
             }
 
             @Override
@@ -176,12 +165,8 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     @Override
     public void showFirstPageResults(List<Article> newsList) {
         searchAdapter.addAll(newsList);
-
-        if (currentPage <= TOTAL_PAGES) {
-            searchAdapter.addLoadingFooter();
-        } else {
-            isLastPage = true;
-        }
+        searchAdapter.addLoadingFooter();
+        isLoading = false;
 
         shouldDisplayNoResultText(false);
     }
@@ -191,12 +176,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
         searchAdapter.removeLoadingFooter();
         isLoading = false;
         searchAdapter.addAll(newsList);
-
-        if (currentPage != TOTAL_PAGES) {
-            searchAdapter.addLoadingFooter();
-        } else {
-            isLastPage = true;
-        }
+        searchAdapter.addLoadingFooter();
 
         shouldDisplayNoResultText(false);
     }
