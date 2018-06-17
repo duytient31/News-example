@@ -28,9 +28,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by mario on 14/06/18.
@@ -52,8 +51,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
 
-    private Disposable disposable;
-
     @Inject
     SearchAdapter searchAdapter;
 
@@ -61,8 +58,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     private AdapterItemDivider adapterItemDivider;
 
     private static final int PAGE_START = 1;
-    // Indicates if footer ProgressBar is shown (i.e. next page is loading)
-    private boolean isLoading = false;
+    private boolean isLoading = false; // is progressbar shown
     private int currentPage;
 
     @Inject
@@ -97,12 +93,7 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
         RxTextView.textChanges(editTextSearch)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CharSequence>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable = d;
-                    }
-
+                .subscribe(new DisposableObserver<CharSequence>() {
                     @Override
                     public void onNext(CharSequence charSequence) {
                         searchAdapter.clear();
@@ -203,13 +194,5 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
     public void onClick() {
         Utils.hideKeyboard(getContext(), editTextSearch);
         presenter.onSearchCloseClicked();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (disposable != null) {
-            disposable.dispose();
-        }
     }
 }
