@@ -16,4 +16,55 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="newsTitle">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/textview_H1_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="newsDescription">
+        <item name="android:textColor">@color/colorGray700</item>
+        <item name="android:textSize">@dimen/textview_H5_size</item>
+        <item name="android:paddingTop">@dimen/spacing_ultra_small</item>
+        <item name="android:paddingBottom">@dimen/spacing_small</item>
+    </style>
+
+    <style name="newsPublishTime">
+        <item name="android:textColor">@color/colorGray500</item>
+        <item name="android:textSize">@dimen/textview_H5_size</item>
+    </style>
+
+    <style name="newsPublishSource">
+        <item name="android:textColor">@color/colorPurple</item>
+        <item name="android:textSize">@dimen/textview_H5_size</item>
+    </style>
+
+    <style name="searchNoResult">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorGray300</item>
+        <item name="android:textSize">@dimen/textview_H2_size</item>
+    </style>
+
+    <style name="newsHeader">
+        <item name="android:paddingTop">@dimen/base_layout_padding</item>
+        <item name="android:paddingStart">@dimen/base_layout_padding</item>
+        <item name="android:paddingEnd">@dimen/base_layout_padding</item>
+        <item name="android:paddingBottom">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/colorGray300</item>
+        <item name="android:textSize">@dimen/textview_header_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/colorGray100</item>
+    </style>
+
+    <style name="searchEditText">
+        <item name="android:textSize">@dimen/textview_H4_size</item>
+        <item name="android:textColorHint">@color/colorGray300</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:inputType">text</item>
+        <item name="android:hint">@string/search_latest_news</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginStart">@dimen/spacing_huge</item>
+    </style>
+
 </resources>

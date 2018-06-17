@@ -17,30 +17,26 @@
 
     <TextView
         android:id="@+id/textView_headline_title"
+        style="@style/newsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/spacing_small"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/textview_H1_size"
-        android:textStyle="bold"
         tools:text="Headline" />
 
     <TextView
         android:id="@+id/textView_headline_source"
+        style="@style/newsPublishSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/spacing_ultra_small"
         android:paddingTop="@dimen/spacing_ultra_small"
-        android:textColor="@color/colorPurple"
-        android:textSize="@dimen/textview_H5_size"
         tools:text="bbc.com" />
 
     <TextView
         android:id="@+id/textView_headline_time"
+        style="@style/newsPublishTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorGray500"
-        android:textSize="@dimen/textview_H5_size"
         android:text="@string/published_ago" />
 
 </LinearLayout>

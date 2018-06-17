@@ -2,15 +2,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textView_header_news"
+    style="@style/newsHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/base_layout_padding"
-    android:paddingEnd="@dimen/base_layout_padding"
-    android:paddingTop="@dimen/base_layout_padding"
-    android:paddingBottom="@dimen/spacing_small"
-    android:textColor="@color/colorGray300"
-    android:textSize="@dimen/textview_header_size"
-    android:textStyle="bold"
-    android:background="@color/colorGray100"
     tools:text="@string/latest_news" />
 
