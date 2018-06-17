@@ -54,7 +54,9 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
 
     private Disposable disposable;
 
-    private SearchAdapter searchAdapter;
+    @Inject
+    SearchAdapter searchAdapter;
+
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
 
@@ -86,7 +88,6 @@ public class SearchFragment extends BaseDialogFragment<SearchContract.Presenter>
 
         progressBar.setVisibility(View.GONE);
 
-        searchAdapter = new SearchAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
 

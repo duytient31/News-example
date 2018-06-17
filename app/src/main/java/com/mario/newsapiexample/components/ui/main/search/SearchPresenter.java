@@ -18,7 +18,9 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     private SearchContract.View view;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private NewsRepository newsRepository;
+
+    @Inject
+    NewsRepository newsRepository;
 
     @Inject
     SearchPresenter() {
@@ -43,7 +45,6 @@ public class SearchPresenter implements SearchContract.Presenter {
     @Override
     public void setView(SearchContract.View view) {
         this.view = view;
-        newsRepository = new NewsRepository();
     }
 
     @Override

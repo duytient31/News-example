@@ -16,8 +16,10 @@ import io.reactivex.schedulers.Schedulers;
 public class NewsPresenter implements NewsContract.Presenter {
 
     private NewsContract.View view;
-    private NewsRepository newsRepository;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    @Inject
+    NewsRepository newsRepository;
 
     @Inject
     NewsPresenter() {
@@ -42,7 +44,6 @@ public class NewsPresenter implements NewsContract.Presenter {
     @Override
     public void setView(NewsContract.View view) {
         this.view = view;
-        newsRepository = new NewsRepository();
     }
 
     @Override

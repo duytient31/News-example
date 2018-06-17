@@ -35,7 +35,9 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
     @BindView(R.id.editText_search)
     EditText editTextNews;
 
-    private NewsAdapter newsAdapter;
+    @Inject
+    NewsAdapter newsAdapter;
+
     private LinearLayoutManager layoutManager;
     private AdapterItemDivider adapterItemDivider;
 
@@ -62,7 +64,6 @@ public class NewsFragment extends BaseDialogFragment<NewsContract.Presenter> imp
             presenter.fetchTopHeadlines();
         }
 
-        newsAdapter = new NewsAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         adapterItemDivider = new AdapterItemDivider(getContext(), R.drawable.recyclerview_divider_medium);
 
