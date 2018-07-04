@@ -13,3 +13,9 @@
 - https://newsapi.org/docs
 - https://newsapi.org/docs/endpoints
 
+## Screenshots
+
+<p align="center">
+<img src="http://i64.tinypic.com/9lh17s.jpg" width="150">
+<img src="http://i63.tinypic.com/16bn62r.jpg" width="150">
+</p>
